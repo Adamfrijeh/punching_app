@@ -3,9 +3,9 @@ import 'package:http/http.dart' as http;
 
 const String baseURL = '12230899.atwebpages.com';
 
-// ===================== MODELS =====================
+
 class Employee {
-  final int id; // DB id
+  final int id;
   final String employeeId;
   final String fullName;
 
@@ -22,8 +22,8 @@ class LocationItem {
 class PunchItem {
   final int id;
   final String location;
-  final String punchType; // checkin / checkout
-  final String punchTime; // e.g. "2026-01-04 12:58:00"
+  final String punchType;
+  final String punchTime;
 
   PunchItem({
     required this.id,
@@ -33,12 +33,11 @@ class PunchItem {
   });
 }
 
-// ===================== GLOBAL STATE =====================
 Employee? currentEmployee;
 List<LocationItem> locations = [];
 List<PunchItem> punches = [];
 
-// ===================== API: LOGIN =====================
+
 Future<void> login(String employeeId, String password, Function(bool ok, String msg) done) async {
   try {
     final url = Uri.http(baseURL, 'login.php');
@@ -64,7 +63,7 @@ Future<void> login(String employeeId, String password, Function(bool ok, String 
   }
 }
 
-// ===================== API: LOCATIONS =====================
+
 Future<void> getLocations(Function(bool ok) loaded) async {
   try {
     final url = Uri.http(baseURL, 'get_locations.php');
@@ -88,7 +87,6 @@ Future<void> getLocations(Function(bool ok) loaded) async {
   }
 }
 
-// ===================== API: PUNCH =====================
 Future<void> punch(int locationId, String type, Function(bool ok) done) async {
   try {
     if (currentEmployee == null) {
@@ -99,7 +97,7 @@ Future<void> punch(int locationId, String type, Function(bool ok) done) async {
     final res = await http.post(url, body: {
       'employee_db_id': currentEmployee!.id.toString(),
       'location_id': locationId.toString(),
-      'punch_type': type, // "checkin" or "checkout"
+      'punch_type': type,
     }).timeout(const Duration(seconds: 5));
 
     final json = convert.jsonDecode(res.body);
@@ -109,7 +107,7 @@ Future<void> punch(int locationId, String type, Function(bool ok) done) async {
   }
 }
 
-// ===================== API: HISTORY =====================
+
 Future<void> getPunches(Function(bool ok) loaded) async {
   try {
     if (currentEmployee == null) {

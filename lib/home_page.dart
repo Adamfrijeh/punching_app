@@ -22,13 +22,13 @@ class _HomePageState extends State<HomePage> {
   void initState() {
     super.initState();
 
-    // update clock
+
     timer = Timer.periodic(const Duration(seconds: 1), (_) {
       if (!mounted) return;
       setState(() => now = DateTime.now());
     });
 
-    // load locations + history
+
     getLocations((ok) {
       if (!mounted) return;
 
@@ -40,7 +40,7 @@ class _HomePageState extends State<HomePage> {
         return;
       }
 
-      // default dropdown = first location
+
       if (locations.isNotEmpty) {
         selectedLocationId = locations.first.id;
       }
@@ -74,7 +74,7 @@ class _HomePageState extends State<HomePage> {
   }
 
   String dateText() {
-    // simple formatted date
+
     const months = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
     const days = ["Mon","Tue","Wed","Thu","Fri","Sat","Sun"];
     return "${days[now.weekday - 1]}, ${months[now.month - 1]} ${now.day}, ${now.year}";
@@ -103,7 +103,7 @@ class _HomePageState extends State<HomePage> {
         SnackBar(content: Text(type == 'checkin' ? 'Checked in ✅' : 'Checked out ✅')),
       );
 
-      // refresh history after punch
+
       getPunches((_) {
         if (!mounted) return;
         setState(() {});
@@ -181,7 +181,7 @@ class _HomePageState extends State<HomePage> {
                     ),
                     const SizedBox(height: 14),
 
-                    // location dropdown
+
                     Container(
                       width: double.infinity,
                       padding: const EdgeInsets.symmetric(horizontal: 14),
@@ -208,7 +208,7 @@ class _HomePageState extends State<HomePage> {
 
                     const SizedBox(height: 16),
 
-                    // Checkin
+
                     SizedBox(
                       width: double.infinity,
                       height: 56,
@@ -224,7 +224,7 @@ class _HomePageState extends State<HomePage> {
                     ),
                     const SizedBox(height: 12),
 
-                    // Checkout
+
                     SizedBox(
                       width: double.infinity,
                       height: 56,
@@ -252,7 +252,7 @@ class _HomePageState extends State<HomePage> {
 
               const SizedBox(height: 14),
 
-              // Buttons row
+
               Row(
                 children: [
                   Expanded(
