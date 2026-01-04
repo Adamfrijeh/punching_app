@@ -61,7 +61,7 @@ class _LoginPageState extends State<LoginPage> {
             children: [
               const SizedBox(height: 70),
 
-               Logo placeholder (you can replace with Image.asset)
+
               Container(
                 width: 110,
                 height: 110,
